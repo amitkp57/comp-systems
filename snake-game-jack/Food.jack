@@ -1,0 +1,60 @@
+/**
+ * Food in Snake game.
+ *  1. Foods are located at fixed positions on the screen
+ *  2. Foods are squares in shape and size is same for all food instances
+ *  3. Once snake eats the food, it is removed from the screen
+ */
+class Food{
+    field int x, y; // left-top coordinate of the food
+    field int size; // length of sides of the sqaure
+
+    /**
+     * Constructs a Food instance
+     * Params:
+     *  ax: x-coordinate of left-top coordinate of food
+     *  ay: y-coordinate of left-top coordinate of food
+     *  aSize: length of sides of the food
+     */
+    constructor Food new(int ax, int ay, int aSize) {
+        let x = ax;
+        let y = ay;
+        let size = aSize;
+        do addToScreen();
+        return this;
+    }
+
+    /**
+     * Adds the food on the screen
+     */
+    method void addToScreen() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, x + size - 1, y + size - 1);
+        return;
+    }
+
+    /**
+     * Removes the food from the screen
+     */
+    method void remove() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y, x + size - 1, y + size - 1);
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /**
+     * Getter method for x
+     * @return
+     */
+    method int getX(){
+        return x;
+    }
+
+    /**
+     * Getter method for y
+     * @return
+     */
+    method int getY(){
+        return y;
+    }
+}

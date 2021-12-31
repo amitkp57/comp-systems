@@ -1,0 +1,136 @@
+/**
+ * Driver class for the snake game
+ *  1. Receves user inputs
+ *  2. Moves the snake and clears out the food once they are eaten by the snake
+ *  3. Kills the snake if it bites itself
+ */
+class Game{
+    /**
+     * 0 - no movement
+     * 1 - goes up
+     * 2 - goes down
+     * 3 - goes right
+     * 4 - goes left
+     */
+    field int direction;
+    field Wall wall;
+    field Snake snake;
+    field Array foods;
+    field int foodSize;
+    /**
+     * Constructs the game
+     */
+    constructor Game new(){
+        let foodSize = 10;
+        let wall = Wall.new();
+        let snake = Snake.new(Food.new(60, 20, 10));
+        let foods = Array.new(10);
+        let foods[0] = Food.new(80, 30, 10);
+        let foods[1] = Food.new(120, 70, 10);
+        let foods[2] = Food.new(160, 100, 10);
+        let foods[3] = Food.new(200, 150, 10);
+        let foods[4] = Food.new(250, 200, 10);
+        let foods[5] = Food.new(300, 230, 10);
+        let foods[6] = Food.new(350, 30, 10);
+        let foods[7] = Food.new(400, 70, 10);
+        let foods[8] = Food.new(450, 100, 10);
+        let foods[9] = Food.new(490, 100, 10);
+        do run();
+        return this;
+    }
+
+    /**
+     * Runs the game
+     */
+    method void run(){
+        var char key;
+        var Food head;
+        var boolean end;
+        var int direction;
+        let direction = 4;
+        let end = false;
+        let key = 0;
+        while(~end){
+            let key = Keyboard.keyPressed();
+            if (key = 81) {
+                let end = true; // exit key 'q'
+            }
+            if (key = 131) {
+                let direction = 1; //arrow up
+            }
+            if (key = 133) {
+                let direction = 2; //arrow down
+            }
+            if (key = 130) {
+                let direction = 3; //arrow left
+            }
+            if (key = 132) {
+                let direction = 4; //arrow right
+            }
+            if(direction = 1){
+                let direction = snake.moveUp();
+            }else{
+                if(direction = 2){
+                    let direction = snake.moveDown();
+                }else{
+                    if(direction = 3){
+                        let direction = snake.moveLeft();
+                    }else{
+                        let direction = snake.moveRight();
+                    }
+                }
+            }
+
+            let head = snake.getHead();
+            if(~(Game.getIndex(head, foods, foodSize) = -1)){
+                do removeFood(head, foods, Game.getIndex(head, foods, foodSize));
+                do snake.eatFood(head, foods, foodSize);
+            }
+
+            if(snake.killedItSelf()){
+                let end = true;
+                do Output.printString("Game lost! Snake bit itself.");
+            }
+
+            if(foodSize < 5){
+                let end = true;
+                do Output.printString("Game won! Congratulations!");
+            }
+            do Sys.wait(100);
+        }
+        return;
+    }
+
+    /**
+     * Removes food from the list of food objects if it is present in the list
+     */
+    method void removeFood(Food food, Array foods, int idx){
+        var int index;
+        let index = idx;
+        while (index < foodSize - 1) {
+            let foods[index] = foods[index + 1];
+            let index = index + 1;
+        }
+        let foodSize = foodSize - 1;
+        return;
+    }
+
+    /**
+     * Returns index of food in the foods array. Returns -1 if not present.
+     */
+    function int getIndex(Food food, Array foods, int foodSize){
+        var Food dummy;
+        var int index;
+        let index = 0;
+        while (index < foodSize) {
+            let dummy = foods[index];
+            if (dummy.getX() = food.getX()) {
+                if (dummy.getY() = food.getY()) {
+                    return index;
+                }
+            }
+            let index = index + 1;
+        }
+        return -1;
+    }
+}

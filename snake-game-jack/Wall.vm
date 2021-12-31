@@ -1,0 +1,87 @@
+function Wall.new 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+push pointer 0
+call Wall.addToScreen 1
+pop temp 0
+push pointer 0
+return
+function Wall.addToScreen 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push pointer 0
+call Wall.colorBoundaries 1
+pop temp 0
+push constant 0
+return
+function Wall.remove 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push pointer 0
+call Wall.colorBoundaries 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Wall.colorBoundaries 0
+push argument 0
+pop pointer 0
+push constant 0
+push constant 0
+push constant 511
+push constant 9
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+push constant 240
+push constant 511
+push constant 255
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+push constant 0
+push constant 9
+push constant 255
+call Screen.drawRectangle 4
+pop temp 0
+push constant 500
+push constant 0
+push constant 511
+push constant 255
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Wall.contains 2
+push argument 0
+call Food.getX 1
+pop local 0
+push argument 0
+call Food.getY 1
+pop local 1
+push local 1
+push constant 10
+lt
+push local 1
+push constant 239
+gt
+or
+push local 0
+push constant 10
+lt
+or
+push local 0
+push constant 499
+gt
+or
+return

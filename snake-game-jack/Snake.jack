@@ -1,0 +1,158 @@
+/**
+ * Snake in Snake game.
+ *  1. Snake will start with an initial size same as Food
+ *  2. It eats any food which comes on it's way.
+ *  3. Once the snake eats a food, food is appended to snake's tail
+ *  4. Snake can move left, right, top and bottom and changes direction when
+ *     it hits a wall.
+ *  5. Snake's direction can be changed using up, down, left and right arrow keys
+ */
+class Snake{
+    field int length; // number of squares in the snake
+    field Array squares; // snake consists of initial square plus foods eaten
+
+    /**
+     * Constructs a Snake instance
+     * Params:
+     *  ax: x-coordinate of left-top coordinate of snake
+     *  ay: y-coordinate of left-top coordinate of snake
+     *  aWidth: width of snake
+     *  aHeight: height of snake
+     */
+    constructor Snake new(Food square){
+        let length = 1;
+        let squares = Array.new(100); // maximum size of snake is 100 squares
+        let squares[0] = square; // Food is used as a square here
+        return this;
+    }
+
+    /**
+     * Moves the snake in upward direction
+     */
+    method int moveUp(){
+        var Food head, tail;
+        var int index;
+        let index = length - 1;
+        let head = squares[0];
+        let tail = squares[length-1];
+        if(head.getY() = 10){
+            return 3;
+        }else{
+            do tail.remove();
+            while(~(index = 0)){
+                let squares[index] = squares[index - 1];
+                let index = index - 1;
+            }
+            let head = Food.new(head.getX(), head.getY() - 10, 10);
+            let squares[0] = head;
+        }
+        return 1;
+    }
+
+    /**
+     * Moves the snake in downward direction
+     */
+    method int moveDown(){
+        var Food head, tail;
+        var int index;
+        let index = length - 1;
+        let head = squares[0];
+        let tail = squares[length-1];
+        if(head.getY() = 230){
+            return 4;
+        }else{
+            do tail.remove();
+            while(~(index = 0)){
+                let squares[index] = squares[index - 1];
+                let index = index - 1;
+            }
+            let head = Food.new(head.getX(), head.getY() + 10, 10);
+            let squares[0] = head;
+        }
+        return 2;
+    }
+
+    /**
+     * Moves the snake in left direction
+     */
+    method int moveLeft(){
+        var Food head, tail;
+        var int index;
+        let index = length - 1;
+        let head = squares[0];
+        let tail = squares[length-1];
+        if(head.getX() = 10){
+            return 2;
+        }else{
+            do tail.remove();
+            while(~(index = 0)){
+                let squares[index] = squares[index - 1];
+                let index = index - 1;
+            }
+            let head = Food.new(head.getX() - 10, head.getY(), 10);
+            let squares[0] = head;
+        }
+        return 3;
+    }
+
+    /**
+     * Moves the snake in right direction
+     */
+    method int moveRight(){
+        var Food head, tail;
+        var int index;
+        let index = length - 1;
+        let head = squares[0];
+        let tail = squares[length-1];
+        if(head.getX() = 490){
+            return 1;
+        }else{
+            do tail.remove();
+            while(~(index = 0)){
+                let squares[index] = squares[index - 1];
+                let index = index - 1;
+            }
+            let head = Food.new(head.getX() + 10, head.getY(), 10);
+            let squares[0] = head;
+        }
+        return 4;
+    }
+
+    /**
+     * When snake eats a food object
+     */
+    method void eatFood(Food food, Array foods, int foodSize){
+        var Food lastFood;
+        let lastFood = squares[length-1];
+        let food = Food.new (lastFood.getX() - 10, lastFood.getY(), 10);
+        if(Wall.contains(food) | (Game.getIndex(food, foods, foodSize) > -1) |
+                (Game.getIndex(food, squares, length) > -1) ){
+            let food = Food.new (lastFood.getX() + 10, lastFood.getY(), 10);
+            if(Wall.contains(food) | (Game.getIndex(food, foods, foodSize) > -1) |
+                    (Game.getIndex(food, squares, length) > -1) ){
+                let food = Food.new (lastFood.getX(), lastFood.getY() - 10, 10);
+                if(Wall.contains(food) | (Game.getIndex(food, foods, foodSize) > -1) |
+                        (Game.getIndex(food, squares, length) > -1) ){
+                    let food = Food.new (lastFood.getX(), lastFood.getY() + 10, 10);
+                }
+            }
+        }
+        let squares[length] = food;
+        let length = length + 1;
+        return;
+    }
+
+    /**
+     * Returns the head of the snake
+     */
+    method Food getHead(){
+        return squares[0];
+    }
+
+    /**
+     * Returns true if the snake bites itself
+     */
+    method boolean killedItSelf(){
+        return Game.getIndex(getHead(), squares, length) > 0;
+    }
+}

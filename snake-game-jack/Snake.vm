@@ -1,0 +1,494 @@
+function Snake.new 0
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push constant 1
+pop this 0
+push constant 100
+call Array.new 1
+pop this 1
+push constant 0
+push this 1
+add
+push argument 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push pointer 0
+return
+function Snake.moveUp 3
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+sub
+pop local 2
+push constant 0
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 0
+push this 0
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 0
+call Food.getY 1
+push constant 10
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 3
+return
+goto IF_END0
+label IF_FALSE0
+push local 1
+call Food.remove 1
+pop temp 0
+label WHILE_EXP0
+push local 2
+push constant 0
+eq
+not
+not
+if-goto WHILE_END0
+push local 2
+push this 1
+add
+push local 2
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+sub
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+call Food.getX 1
+push local 0
+call Food.getY 1
+push constant 10
+sub
+push constant 10
+call Food.new 3
+pop local 0
+push constant 0
+push this 1
+add
+push local 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_END0
+push constant 1
+return
+function Snake.moveDown 3
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+sub
+pop local 2
+push constant 0
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 0
+push this 0
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 0
+call Food.getY 1
+push constant 230
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 4
+return
+goto IF_END0
+label IF_FALSE0
+push local 1
+call Food.remove 1
+pop temp 0
+label WHILE_EXP0
+push local 2
+push constant 0
+eq
+not
+not
+if-goto WHILE_END0
+push local 2
+push this 1
+add
+push local 2
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+sub
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+call Food.getX 1
+push local 0
+call Food.getY 1
+push constant 10
+add
+push constant 10
+call Food.new 3
+pop local 0
+push constant 0
+push this 1
+add
+push local 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_END0
+push constant 2
+return
+function Snake.moveLeft 3
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+sub
+pop local 2
+push constant 0
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 0
+push this 0
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 0
+call Food.getX 1
+push constant 10
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 2
+return
+goto IF_END0
+label IF_FALSE0
+push local 1
+call Food.remove 1
+pop temp 0
+label WHILE_EXP0
+push local 2
+push constant 0
+eq
+not
+not
+if-goto WHILE_END0
+push local 2
+push this 1
+add
+push local 2
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+sub
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+call Food.getX 1
+push constant 10
+sub
+push local 0
+call Food.getY 1
+push constant 10
+call Food.new 3
+pop local 0
+push constant 0
+push this 1
+add
+push local 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_END0
+push constant 3
+return
+function Snake.moveRight 3
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+sub
+pop local 2
+push constant 0
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 0
+push this 0
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 0
+call Food.getX 1
+push constant 490
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 1
+return
+goto IF_END0
+label IF_FALSE0
+push local 1
+call Food.remove 1
+pop temp 0
+label WHILE_EXP0
+push local 2
+push constant 0
+eq
+not
+not
+if-goto WHILE_END0
+push local 2
+push this 1
+add
+push local 2
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+sub
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+call Food.getX 1
+push constant 10
+add
+push local 0
+call Food.getY 1
+push constant 10
+call Food.new 3
+pop local 0
+push constant 0
+push this 1
+add
+push local 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_END0
+push constant 4
+return
+function Snake.eatFood 1
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+sub
+push this 1
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Food.getX 1
+push constant 10
+sub
+push local 0
+call Food.getY 1
+push constant 10
+call Food.new 3
+pop argument 1
+push argument 1
+call Wall.contains 1
+push argument 1
+push argument 2
+push argument 3
+call Game.getIndex 3
+push constant 1
+neg
+gt
+or
+push argument 1
+push this 1
+push this 0
+call Game.getIndex 3
+push constant 1
+neg
+gt
+or
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+call Food.getX 1
+push constant 10
+add
+push local 0
+call Food.getY 1
+push constant 10
+call Food.new 3
+pop argument 1
+push argument 1
+call Wall.contains 1
+push argument 1
+push argument 2
+push argument 3
+call Game.getIndex 3
+push constant 1
+neg
+gt
+or
+push argument 1
+push this 1
+push this 0
+call Game.getIndex 3
+push constant 1
+neg
+gt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+call Food.getX 1
+push local 0
+call Food.getY 1
+push constant 10
+sub
+push constant 10
+call Food.new 3
+pop argument 1
+push argument 1
+call Wall.contains 1
+push argument 1
+push argument 2
+push argument 3
+call Game.getIndex 3
+push constant 1
+neg
+gt
+or
+push argument 1
+push this 1
+push this 0
+call Game.getIndex 3
+push constant 1
+neg
+gt
+or
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+call Food.getX 1
+push local 0
+call Food.getY 1
+push constant 10
+add
+push constant 10
+call Food.new 3
+pop argument 1
+label IF_FALSE2
+label IF_FALSE1
+label IF_FALSE0
+push this 0
+push this 1
+add
+push argument 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 0
+push constant 1
+add
+pop this 0
+push constant 0
+return
+function Snake.getHead 0
+push argument 0
+pop pointer 0
+push constant 0
+push this 1
+add
+pop pointer 1
+push that 0
+return
+function Snake.killedItSelf 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Snake.getHead 1
+push this 1
+push this 0
+call Game.getIndex 3
+push constant 0
+gt
+return

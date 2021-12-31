@@ -1,0 +1,56 @@
+/**
+ * Wall in the snake game. Usually the rectangular borders are the walls.
+ * Snake will change direction once it hits a wall.
+ */
+class Wall{
+    field int size;
+
+    /**
+     * Constructs the walls for this game
+     */
+    constructor Wall new(){
+        do addToScreen();
+        return this;
+    }
+
+    /**
+     * Adds the walls on the screen
+     */
+    method void addToScreen(){
+        do Screen.setColor(true);
+        do colorBoundaries();
+        return;
+    }
+
+    /**
+     * Removes the walls from the screen
+     */
+    method void remove(){
+        do Screen.setColor(false);
+        do colorBoundaries();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /**
+     * Colors the bondary walls with either black or white color
+     */
+    method void colorBoundaries(){
+        do Screen.drawRectangle(0, 0, 511, 9);
+        do Screen.drawRectangle(0, 240, 511, 255);
+        do Screen.drawRectangle(0, 0, 9, 255);
+        do Screen.drawRectangle(500, 0, 511, 255);
+        return;
+    }
+
+    /**
+     * Returns true the the square lies within the wall
+     */
+    function boolean contains(Food food){
+        var int xf, yf;
+        let xf = food.getX();
+        let yf = food.getY();
+        return (yf<10) | (yf>239) | (xf<10) | (xf>499);
+    }
+
+}
