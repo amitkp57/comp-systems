@@ -12,6 +12,7 @@
     <modules>
         <module>compiler</module>
         <module>assembler</module>
+        <module>utils</module>
     </modules>
 
     <build>
