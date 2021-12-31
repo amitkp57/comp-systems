@@ -13,6 +13,8 @@
         <module>compiler</module>
         <module>assembler</module>
         <module>utils</module>
+        <module>untitled</module>
+        <module>vm-translator</module>
     </modules>
 
     <build>
